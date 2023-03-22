@@ -2,7 +2,7 @@
 <package format="2">
   <name>indiana_drum_driver</name>
   <version>0.0.0</version>
-  <description>The indiana_drum_driver package</description>
+  <description>The haru_drums_ros_driver package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
