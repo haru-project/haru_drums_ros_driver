@@ -11,7 +11,7 @@ import yaml
 from std_msgs.msg import String
 import rospkg
 
-package_path = rospkg.RosPack().get_path("indiana_drum_driver")
+package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 config_path = os.path.join(package_path, "config")
 settings_path = os.path.join(config_path, "drum_settings.yaml")
 
