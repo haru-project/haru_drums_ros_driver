@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(indiana_drum_driver)
+project(haru_drums_ros_driver)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -104,7 +104,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES indiana_drum_driver
+#  LIBRARIES haru_drums_ros_driver
 #  CATKIN_DEPENDS genpy rospy std_msgs
 #  DEPENDS system_lib
 )
@@ -122,7 +122,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/indiana_drum_driver.cpp
+#   src/${PROJECT_NAME}/haru_drums_ros_driver.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -133,7 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/indiana_drum_driver_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/haru_drums_ros_driver_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
