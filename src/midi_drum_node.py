@@ -10,6 +10,7 @@ import rospy
 import yaml
 from std_msgs.msg import String
 import rospkg
+from strawberry_ros_msgs.msg import DrumMidiSignal
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 config_path = os.path.join(package_path, "config")
@@ -24,7 +25,7 @@ class MidiDrum():
         self.color_to_num_dict = settings["color_number"]
         self.num_to_color_dict = settings["number_color"]
         self.color_pub = rospy.Publisher('midi_drum/hit', String, queue_size=10)
-
+        self.midi_signal_pub = rospy.Publisher('midi_signal/hit', DrumMidiSignal, queue_size=10)
         self.midi_in = rtmidi.MidiIn()
         self.midi_in.open_port(self.port)
         self.midi_in.set_callback(self.handle)
@@ -33,7 +34,12 @@ class MidiDrum():
         if event[0][2] == 127 and (event[1] > 0.2 or event[1] == 0.0):
             s = String()
             s.data = self.num_to_color_dict[event[0][1]]
+            midi_signal = DrumMidiSignal()
+            midi_signal.color = self.num_to_color_dict[event[0][1]]
+            midi_signal.midi_key = event[0][1]
+            midi_signal.delta_time = event[1]
             self.color_pub.publish(s)
+            self.midi_signal_pub.publish(midi_signal)
 
     def shutdown(self):
         self.midi_in.close_port()
