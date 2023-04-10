@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import yaml
+import json
 import rtmidi
 import time
 import os
@@ -69,5 +70,8 @@ drum_data = {
 
 with open(os.path.join(config_path, "drum_settings.yaml"), "w") as file:
     yaml.dump(drum_data, file)
+
+with open(os.path.join(config_path, "drum_settings.json"), "w") as file:
+    json.dump(drum_data, file, indent=2)
 
 print("Drum config file changed!")
