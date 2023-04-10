@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>indiana_drum_driver</name>
+  <name>haru_drums_ros_driver</name>
   <version>0.0.0</version>
   <description>The haru_drums_ros_driver package</description>
 
