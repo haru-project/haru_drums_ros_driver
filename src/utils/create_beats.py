@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import rtmidi
 import mido
 import subprocess
@@ -49,12 +50,12 @@ class BeatsCreator():
                 self.track.append(mido.Message("note_on", note=message[1], velocity=50, time=elapse_time, channel=9))
             elif message[0] == 137:
                 self.track.append(mido.Message("note_off", note=message[1], velocity=50, time=elapse_time, channel=9))
-    
+
     def shutdown(self, signum, frame):
         # Save the midi file and create the wav file
-        self.midi_file.save('midi_file2.mid')
-        with open("mi_archivo2.wav", "wb") as f:
-            subprocess.call(["timidity", "-Ow", "-o", "-", "midi_file2.mid"], stdout=f)
+        self.midi_file.save('midi_file.mid')
+        with open("recording.wav", "wb") as f:
+            subprocess.call(["timidity", "-Ow", "-o", "-", "midi_file.mid"], stdout=f)
 
         # Close the MIDI input stream
         self.midi_in.close_port()
