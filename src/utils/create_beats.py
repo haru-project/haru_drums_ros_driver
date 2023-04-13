@@ -55,6 +55,7 @@ class BeatsCreator():
         self.midi_file.save('midi_file2.mid')
         with open("mi_archivo2.wav", "wb") as f:
             subprocess.call(["timidity", "-Ow", "-o", "-", "midi_file2.mid"], stdout=f)
+
         # Close the MIDI input stream
         self.midi_in.close_port()
         del self.midi_in
