@@ -6,7 +6,7 @@ import yaml
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 
-sounds_folder = os.path.join(package_path, "src", "sounds", "quetevotechapote")
+sounds_folder = os.path.join(package_path, "src", "../src/sounds", "sound_set_1")
 config_path = os.path.join(package_path, "config")
 settings_path = os.path.join(config_path, "drum_settings.yaml")
 
