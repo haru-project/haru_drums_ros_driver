@@ -9,18 +9,20 @@ package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 sounds_folder = os.path.join(package_path, "src", "../src/sounds", "sound_set_1")
 config_path = os.path.join(package_path, "config")
 settings_path = os.path.join(config_path, "drum_settings.yaml")
+try:
+    with open(settings_path, "r") as file:
+        settings = yaml.safe_load(file)
 
-with open(settings_path, "r") as file:
-    settings = yaml.safe_load(file)
+    num_to_color_dict = settings["number_color"]
 
-num_to_color_dict = settings["number_color"]
+    rutas = []
+    for sound in os.listdir(sounds_folder):
+        rutas.append(os.path.join(sounds_folder, sound))
 
-rutas = []
-for sound in os.listdir(sounds_folder):
-    rutas.append(os.path.join(sounds_folder, sound))
-
-# Ruta al archivo de audio
-sounds = dict(zip(num_to_color_dict.keys(), rutas))
+    # Ruta al archivo de audio
+    sounds = dict(zip(num_to_color_dict.keys(), rutas))
+except:
+    print("Not enough custom sounds")
 
 def play_sound(number):
     path_to_sound = sounds[number]
