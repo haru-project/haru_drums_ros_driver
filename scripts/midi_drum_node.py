@@ -10,8 +10,10 @@ import rospy
 import yaml
 import rospkg
 import threading
+import sys
 from haru_drums_ros_driver.msg import DrumMidiSignal
 from custom_sounds_module import play_sound
+
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 config_path = os.path.join(package_path, "config")
@@ -26,10 +28,7 @@ class MidiDrum():
         self.color_to_num_dict = settings["color_number"]
         self.num_to_color_dict = settings["number_color"]
         self.midi_signal_pub = rospy.Publisher('midi_signal/hit', DrumMidiSignal, queue_size=10)
-
-
         self.custom_sounds = custom_sounds
-
         self.midi_in = rtmidi.MidiIn()
         self.midi_in.open_port(self.port)
         self.midi_in.set_callback(self.handle)
@@ -39,7 +38,7 @@ class MidiDrum():
         thread.start()
 
     def handle(self, event, data):
-        if event[0][2] == 127 and (event[1] > 0.2 or event[1] == 0.0):
+        if event[0][2] == 127 and (event[1] > 0.15 or event[1] == 0.0):
             midi_signal = DrumMidiSignal()
             midi_signal.color = self.num_to_color_dict[event[0][1]]
             midi_signal.midi_key = event[0][1]
@@ -51,6 +50,8 @@ class MidiDrum():
 
     def shutdown(self):
         self.midi_in.close_port()
+
+
 
     def __str__(self):
         s = f"Midi Drum\n-------------------------------------\nListening through port: {self.port}\n-------------------------------------\n" \
