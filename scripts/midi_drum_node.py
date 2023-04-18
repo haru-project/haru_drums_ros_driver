@@ -10,7 +10,7 @@ import rospy
 import yaml
 import rospkg
 import threading
-from strawberry_ros_msgs.msg import DrumMidiSignal
+from haru_drums_ros_driver.msg import DrumMidiSignal
 from custom_sounds_module import play_sound
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
@@ -34,7 +34,7 @@ class MidiDrum():
         self.midi_in.set_callback(self.handle)
 
     def play_sound_async(self, midi_code):
-        thread = threading.Thread(target=play_sound, args=(midi_code,))
+        thread = threading.Thread(target=play_sound, args=(midi_code,), daemon=True)
         thread.start()
 
     def handle(self, event, data):
