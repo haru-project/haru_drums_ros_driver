@@ -27,6 +27,7 @@ class MidiDrum():
         self.num_to_color_dict = settings["number_color"]
         self.midi_signal_pub = rospy.Publisher('midi_signal/hit', DrumMidiSignal, queue_size=10)
 
+
         self.custom_sounds = custom_sounds
 
         self.midi_in = rtmidi.MidiIn()
