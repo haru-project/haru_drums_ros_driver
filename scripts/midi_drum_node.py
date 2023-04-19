@@ -27,10 +27,15 @@ class MidiDrum():
         self.color_to_num_dict = settings["color_number"]
         self.num_to_color_dict = settings["number_color"]
         self.midi_signal_pub = rospy.Publisher('midi_signal/hit', DrumMidiSignal, queue_size=10)
+        self.midi_record_sus = rospy.Subscriber('midi_signal/record', DrumMidiSignal, self.play_record)
         self.custom_sounds = custom_sounds
         self.midi_in = rtmidi.MidiIn()
         self.midi_in.open_port(self.port)
         self.midi_in.set_callback(self.handle)
+
+    def play_record(self, signal_msg: DrumMidiSignal):
+        rospy.loginfo(f"{signal_msg.color} hit")
+        self.play_sound_async(signal_msg.midi_key)
 
     def play_sound_async(self, midi_code):
         thread = threading.Thread(target=play_sound, args=(midi_code,), daemon=True)
