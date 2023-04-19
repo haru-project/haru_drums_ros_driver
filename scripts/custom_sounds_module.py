@@ -1,11 +1,8 @@
 import rospkg
 import os
 import yaml
-import sys
 from pydub import AudioSegment
 from pydub.playback import play
-
-sys.stderr = open("errores_alsa.txt", "w")
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 sound_folder = os.path.join(package_path, "src", "sounds", "sound_set_1")

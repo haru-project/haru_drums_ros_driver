@@ -10,7 +10,6 @@ import rospy
 import yaml
 import rospkg
 import threading
-import sys
 from haru_drums_ros_driver.msg import DrumMidiSignal
 from custom_sounds_module import play_sound
 
