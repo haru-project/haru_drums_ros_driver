@@ -1,2 +1,4 @@
-<node pkg="haru_drums_ros_driver" type="venv_launcher.py" name="drum_node" respawn="$(arg respawn)" output="screen"
-    args="--venv $(find haru_drums_ros_driver)/venv_drums_drivers --file drum_setup.py"/>
+<launch>
+    <node pkg="haru_drums_ros_driver" type="midi_drum_node.py" name="drum_node" output="screen"
+          args="--venv $(find haru_drums_ros_driver)/venv --file midi_drum_node.py"/>
+</launch>
