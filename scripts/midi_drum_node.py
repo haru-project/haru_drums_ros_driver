@@ -58,7 +58,7 @@ class MidiDrum():
 
 
     def __str__(self):
-        s = f"Midi Drum\n-------------------------------------\nListening through port: {self.port}\n-------------------------------------\n" \
+        s: str = f"Midi Drum\n-------------------------------------\nListening through port: {self.port}\n-------------------------------------\n" \
             f"Color dictionary:\n\n"
         for key, value in self.num_to_color_dict.items():
             s += f"{key} <-----> {value}\n"
