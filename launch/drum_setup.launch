@@ -1,0 +1,7 @@
+<launch>
+
+    <!-- Node to configure all the setup of the drum you want to use -->
+    <node pkg="haru_drums_ros_driver" type="venv_launcher.py" name="drum_setup" respawn="$(arg respawn)" output="screen"
+    args="--venv $(find haru_drums_ros_driver)/venv_drums_drivers --file drum_setup.py"/>
+
+</launch>

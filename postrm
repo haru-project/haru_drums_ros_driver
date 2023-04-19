@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$1" != "upgrade" ] ; then
+
+    echo "Removing virtual enviroment files..."
+    sudo rm -rf /opt/ros/$(ls /opt/ros/)/share/venv_drums_drivers
+    echo "Virtual enviroment removed"
+
+fi
