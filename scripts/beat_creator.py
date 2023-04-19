@@ -6,8 +6,6 @@ import rospkg
 import argparse
 import time
 from haru_drums_ros_driver.msg import DrumMidiSignal
-import pkg_resources
-
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 beats_path = os.path.join(package_path, "src", "beats")
@@ -61,20 +59,6 @@ class BeatCreator():
 
 
 if __name__ == '__main__':
-    import pkg_resources
-
-    # Crea un conjunto vacío para almacenar los paquetes necesarios.
-    required = set()
-
-    # Itera sobre cada archivo de Python en el proyecto y utiliza pkg_resources.require() para obtener los paquetes necesarios.
-    for dist in pkg_resources.working_set:
-        for filename in dist.get_metadata_lines('RECORD'):
-            # Filtra solo los archivos .py y agrega el paquete correspondiente al conjunto "required".
-            if filename.endswith('.py'):
-                required.add(dist.project_name)
-
-    # Imprime la lista de paquetes necesarios.
-    print('\n'.join(sorted(required)))
     parser = argparse.ArgumentParser("Beat Creator")
     parser.add_argument("--filename", default="", type=str, help="Name of the new beat sequence")
     parser.add_argument("--play_beat", action="store_true", help="Play the recorded beat")
