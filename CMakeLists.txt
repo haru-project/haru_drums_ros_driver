@@ -161,7 +161,7 @@ catkin_install_python(PROGRAMS
    scripts/beat_creator.py
    scripts/custom_sounds_module.py
    scripts/drum_setup.py
-   sscripts/midi_drum_node.py
+   scripts/midi_drum_node.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
