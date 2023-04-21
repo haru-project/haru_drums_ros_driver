@@ -14,7 +14,7 @@ Run this command the first time you use the drums
 rosrun haru_drums_ros_driver run_drum_setup.sh
 ```
 
-### Init drum driver
+### Step 2: Init drum driver
 
 
 ```shell
