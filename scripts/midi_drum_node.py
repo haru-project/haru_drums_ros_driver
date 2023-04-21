@@ -5,6 +5,8 @@ This node will publish and execute all actions related
 to the interaction with
 """
 import os
+import logging
+logging.basicConfig(level=logging.ERROR)
 import rtmidi
 import rospy
 import yaml
@@ -34,7 +36,7 @@ class MidiDrum():
         self.midi_in.set_callback(self.handle)
 
     def play_record(self, signal_msg: DrumMidiSignal):
-        rospy.loginfo(f"{signal_msg.color} hit")
+        rospy.loginfo(f"{signal_msg.color} hit \n")
         self.play_sound_async(signal_msg.midi_key)
 
     def play_sound_async(self, midi_code):

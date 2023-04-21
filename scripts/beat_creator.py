@@ -26,16 +26,24 @@ class BeatCreator():
             return yaml.safe_load(f)
 
     def save_data(self, dato):
+        rospy.loginfo("saving hit")
         with open(self.yaml_file, "w") as f:
             yaml.safe_dump(dato, f)
 
     def record_callback(self, msg: DrumMidiSignal):
         self.beat = self.load_data()
-        self.beat["hit_sequence"].append({
-            "color": msg.color,
-            "midi_key": msg.midi_key,
-            "delta_time": msg.delta_time
-        })
+        if self.beat["hit_sequence"] == []:
+            self.beat["hit_sequence"].append({
+                "color": msg.color,
+                "midi_key": msg.midi_key,
+                "delta_time": 0.0
+            })
+        else:
+            self.beat["hit_sequence"].append({
+                "color": msg.color,
+                "midi_key": msg.midi_key,
+                "delta_time": msg.delta_time
+            })
         self.save_data(self.beat)
         rospy.loginfo(f"{msg.color} hit")
 
@@ -46,13 +54,10 @@ class BeatCreator():
             signal_msg = DrumMidiSignal()
             signal_msg.color = beat["color"]
             signal_msg.midi_key = beat["midi_key"]
-            if i == 0:
-                signal_msg.delta_time = 0
-            else:
-                signal_msg.delta_time = beat["delta_time"]
+            signal_msg.delta_time = beat["delta_time"]
+            rospy.sleep(signal_msg.delta_time)
             self.beat_publisher.publish(signal_msg)
             rospy.loginfo(signal_msg.color)
-            rospy.sleep(signal_msg.delta_time)
         rospy.loginfo("Beat ended")
         rospy.signal_shutdown("Node ended his purpouse")
 
