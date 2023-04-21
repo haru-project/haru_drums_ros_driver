@@ -19,9 +19,9 @@ def read_drum_hit(port):
         "count": 0
     }
 
-    def handle(event, data):
-        if event[0][2] == 127:
-            data["number"].append(event[0][1])
+    def handle(et, data):
+        if et[0][2] == 127:
+            data["number"].append(et[0][1])
             data["count"] += 1
 
     midi_in = rtmidi.MidiIn()
