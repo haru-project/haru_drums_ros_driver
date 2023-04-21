@@ -4,7 +4,6 @@ import yaml
 import os
 import rospkg
 import argparse
-import time
 from haru_drums_ros_driver.msg import DrumMidiSignal
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
@@ -53,7 +52,7 @@ class BeatCreator():
                 signal_msg.delta_time = beat["delta_time"]
             self.beat_publisher.publish(signal_msg)
             rospy.loginfo(signal_msg.color)
-            time.sleep(signal_msg.delta_time)
+            rospy.sleep(signal_msg.delta_time)
         rospy.loginfo("Beat ended")
         rospy.signal_shutdown("Node ended his purpouse")
 
@@ -61,7 +60,7 @@ class BeatCreator():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Beat Creator")
     parser.add_argument("--filename", default="", type=str, help="Name of the new beat sequence")
-    parser.add_argument("--play_beat", action="store_true", help="Play the recorded beat")
+    parser.add_argument("--play-beat", action="store_true", help="Play the recorded beat")
     args = parser.parse_args()
     print(f"Opción booleana: {args.play_beat}")
 
