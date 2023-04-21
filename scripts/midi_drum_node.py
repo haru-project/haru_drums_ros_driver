@@ -5,8 +5,6 @@ This node will publish and execute all actions related
 to the interaction with
 """
 import os
-import logging
-logging.basicConfig(level=logging.ERROR)
 import rtmidi
 import rospy
 import yaml
