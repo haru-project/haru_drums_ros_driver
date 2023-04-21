@@ -1,7 +1,4 @@
 <launch>
-    <arg name="venv_python_path" default="$(find haru_drums_ros_driver)/venv/bin/python3" />
-
-    <node pkg="haru_drums_ros_driver" type="midi_drum_node.py" name="drum_node" output="screen" >
-        <env name="PYTHONPATH" value="$(arg venv_python_path):$(env PYTHONPATH)" />
+    <node name="drum_node" pkg="haru_drums_ros_driver" type="run_midi_drum_node.sh" output="screen" >
     </node>
 </launch>
