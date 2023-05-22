@@ -5,7 +5,7 @@ from pydub import AudioSegment
 from pydub.playback import play
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
-sound_folder = os.path.join(package_path, "src", "sounds", "sound_set_1")
+sound_folder = os.path.join(package_path, "src", "sounds", "sound_set_2")
 drum_settings_path = os.path.join(package_path, "config", "drum_settings.yaml")
 
 with open(drum_settings_path, "r") as file:

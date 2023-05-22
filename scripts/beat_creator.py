@@ -26,7 +26,6 @@ class BeatCreator():
             return yaml.safe_load(f)
 
     def save_data(self, dato):
-        rospy.loginfo("saving hit")
         with open(self.yaml_file, "w") as f:
             yaml.safe_dump(dato, f)
 
@@ -36,7 +35,7 @@ class BeatCreator():
             self.beat["hit_sequence"].append({
                 "color": msg.color,
                 "midi_key": msg.midi_key,
-                "delta_time": 0.0
+                "delta_time": 0.16
             })
         else:
             self.beat["hit_sequence"].append({
@@ -45,20 +44,18 @@ class BeatCreator():
                 "delta_time": msg.delta_time
             })
         self.save_data(self.beat)
-        rospy.loginfo(f"{msg.color} hit")
+        rospy.loginfo(f"{msg.color}")
 
     def play_beat(self):
         self.beat = self.load_data()
-        rospy.loginfo("Playing beat")
-        for i, beat in enumerate(self.beat["hit_sequence"]):
+        for beat in self.beat["hit_sequence"]:
             signal_msg = DrumMidiSignal()
             signal_msg.color = beat["color"]
             signal_msg.midi_key = beat["midi_key"]
             signal_msg.delta_time = beat["delta_time"]
             rospy.sleep(signal_msg.delta_time)
+            rospy.loginfo(f"Publishing {signal_msg.color}")
             self.beat_publisher.publish(signal_msg)
-            rospy.loginfo(signal_msg.color)
-        rospy.loginfo("Beat ended")
         rospy.signal_shutdown("Node ended his purpouse")
 
 
@@ -67,7 +64,6 @@ if __name__ == '__main__':
     parser.add_argument("--filename", default="", type=str, help="Name of the new beat sequence")
     parser.add_argument("--play-beat", action="store_true", help="Play the recorded beat")
     args = parser.parse_args()
-    print(f"Opción booleana: {args.play_beat}")
 
     rospy.init_node("beat_creator")
     beat = BeatCreator(args.filename, args.play_beat)

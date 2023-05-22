@@ -34,7 +34,6 @@ class MidiDrum():
         self.midi_in.set_callback(self.handle)
 
     def play_record(self, signal_msg: DrumMidiSignal):
-        rospy.loginfo(f"{signal_msg.color} hit \n")
         self.play_sound_async(signal_msg.midi_key)
 
     def play_sound_async(self, midi_code):
@@ -48,7 +47,6 @@ class MidiDrum():
             midi_signal.midi_key = event[0][1]
             midi_signal.delta_time = event[1]
             self.midi_signal_pub.publish(midi_signal)
-
             if self.custom_sounds:
                 self.play_sound_async(event[0][1])
 
