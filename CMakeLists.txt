@@ -159,7 +159,6 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
    scripts/beat_creator.py
-   scripts/custom_sounds_module.py
    scripts/drum_setup.py
    scripts/midi_drum_node.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

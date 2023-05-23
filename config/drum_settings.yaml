@@ -15,3 +15,11 @@ number_color:
   48: yellow
   49: red
   51: blue
+number_sound:
+  38: /home/daiego/catkin_ws/src/haru_drums_ros_driver/src/sounds/sound_set_1/sound7.mp3
+  43: /home/daiego/catkin_ws/src/haru_drums_ros_driver/src/sounds/sound_set_1/sound6.mp3
+  45: /home/daiego/catkin_ws/src/haru_drums_ros_driver/src/sounds/sound_set_1/sound5.mp3
+  46: /home/daiego/catkin_ws/src/haru_drums_ros_driver/src/sounds/sound_set_1/sound1.mp3
+  48: /home/daiego/catkin_ws/src/haru_drums_ros_driver/src/sounds/sound_set_1/sound3.mp3
+  49: /home/daiego/catkin_ws/src/haru_drums_ros_driver/src/sounds/sound_set_1/sound2.mp3
+  51: /home/daiego/catkin_ws/src/haru_drums_ros_driver/src/sounds/sound_set_1/sound4.mp3
