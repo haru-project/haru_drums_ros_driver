@@ -22,7 +22,7 @@ from pydub.playback import play
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 settings_path = os.path.join(package_path, "config", "drum_settings.yaml")
-sound_folder = os.path.join(package_path, "src", "sounds", "sound_set_1")
+sound_folder = os.path.join(package_path, "src", "sounds", "Mii_music_sounds")
 
 with open(settings_path, "r") as file:
     settings = yaml.safe_load(file)
@@ -70,7 +70,7 @@ class MidiDrum():
 
     def __str__(self):
         s: str = f"Midi Drum\n-------------------------------------\nListening through port: {self.port}\n-------------------------------------\n" \
-                 f"Color dictionary:\n\n"
+                 f"Color dictionary:"
         for key, value in self.num_to_color_dict.items():
             s += f"{key} <-----> {value}\n"
         return s
