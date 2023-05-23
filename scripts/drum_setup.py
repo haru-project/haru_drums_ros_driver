@@ -35,9 +35,9 @@ def read_drum_hit(port):
 
 
 def setup_midi_port():
-    print("################################")
-    print('#       PORT SELECTION         #')
-    print('################################\n')
+    print('######################################################')
+    print('#                   PORT SELECTION                   #')
+    print('######################################################\n')
     print("Available midi ports:")
 
     available_ports = []
@@ -55,9 +55,9 @@ def setup_midi_port():
 
 
 def setup_colors(port):
-    print("################################")
-    print('#    COLOR CONFIGURATION       #')
-    print('################################\n')
+    print('######################################################')
+    print('#                  COLOR CONFIGURATION               #')
+    print('######################################################\n')
     print("For each color press the corresponding pad three times\n")
     drum_note_dict = {}
     drum_color_dict = {}
@@ -77,9 +77,9 @@ def setup_colors(port):
 
 
 def setup_sound_set():
-    print("################################")
-    print('#   SOUND EFFECT SELECTION     #')
-    print('################################\n')
+    print('######################################################')
+    print('#                SOUND EFFECT SELECTION              #')
+    print('######################################################\n')
 
     print("These are the detected sound effects")
 

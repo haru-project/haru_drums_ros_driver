@@ -8,15 +8,16 @@ kit hardware and ROS-based applications.
 ## Usage
 ### Step 1: Drum configuration
 
-Run this command the first time you use the drums
+Run this command the first time you use the drums. Follow the steps to set up your default midi port,
+sounds and the colors of the drum pads
 
 ```shell
 rosrun haru_drums_ros_driver run_drum_setup.sh
 ```
 
 ### Step 2: Init drum driver
-
-
+The drum driver node is responsible for capturing drum hits and publishing
+DrumMidiSignal messages.
 ```shell
 roslaunch haru_drums_ros_driver midi_drum_driver.launch
 ```
