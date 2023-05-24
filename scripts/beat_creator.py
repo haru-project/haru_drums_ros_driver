@@ -37,7 +37,7 @@ class BeatCreator():
             self.beat["hit_sequence"].append({
                 "color": msg.color,
                 "midi_key": msg.midi_key,
-                "delta_time": 0.16
+                "delta_time": 0.11
             })
         else:
             self.beat["hit_sequence"].append({
@@ -68,9 +68,11 @@ class BeatCreator():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Beat Creator")
-    parser.add_argument("--filename", default="", type=str, help="Name of the new beat sequence")
-    parser.add_argument("--play-beat", action="store_true", help="Play the recorded beat")
+    parser.add_argument("--filename", default="test", type=str, help="Name of new/existing beat file to play/record.")
+    parser.add_argument("--play-beat", action="store_true", help="Play the selected beat. WARNING: If not declared, will rewrite the file.")
+    parser.add_argument("--num-hits", default=20, help="Define how many hits will be in the beat sequence. Default: 20.")
+
     args = parser.parse_args()
     rospy.init_node("beat_creator")
-    beat = BeatCreator(args.filename, args.play_beat)
+    beat = BeatCreator(args.filename, args.play_beat, int(args.num_hits))
     rospy.spin()

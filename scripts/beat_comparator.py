@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import yaml
 import rospy
@@ -22,7 +23,10 @@ def beat_path(string):
 def play_record_factory(beat_filename, play=False):
     """
     Factory of BeatCreator objects.
-    Can create objects that are either players or recorders
+    Can create objects that are either players or recorders.
+
+    :param beat_filename: Name of the beat to play/replicate
+    :param play: If set to True, will play the beat, otherwise will record a beatfile for later comparison
     :return:
     """
     with open(beat_path(beat_filename), "r") as file:
@@ -44,16 +48,30 @@ def play_and_request_beat(beat_filename="ejemplo"):
     :param beat_filename:
     :return:
     """
-    rospy.loginfo("PLAYING BEAT")
-    play_process = multiprocessing.Process(target=play_record_factory, args=(beat_filename, True))
-    play_process.start()
-    play_process.join()
+    print("HARU'S TURN")
+    haru_turn(beat_filename)
+    print("PLAYER'S TURN")
+    user_turn(beat_filename)
 
-    rospy.loginfo("PLAYER'S TURN")
-    record_process = multiprocessing.Process(target=play_record_factory, args=(beat_filename, False))
+def haru_turn(filename):
+    """
+    Haru's turn will always play the beat
+    :param filename:
+    :return:
+    """
+    record_process = multiprocessing.Process(target=play_record_factory, args=(filename, True))
     record_process.start()
     record_process.join()
 
+def user_turn(filename):
+    """
+    User's turn will always request a beat
+    :param filename:
+    :return:
+    """
+    record_process = multiprocessing.Process(target=play_record_factory, args=(filename, False))
+    record_process.start()
+    record_process.join()
 
 def compare_results(beat_filename="ejemplo", plot_eval=False):
     """
@@ -134,21 +152,24 @@ def plot_results(colors, delta_times, score_color, score_time):
     plt.ylabel("Time elapsed since last hit")
     plt.xlabel("Hit count")
     plt.figtext(0.75, 0.95, f"Color score: {score_color} / 10\n"
-                            f" Time score: {score_time} /  10",
+                            f" Time score: {score_time}  / 10",
                 ha='left', va='center', bbox=dict(facecolor='white', edgecolor='black'))
     plt.show()
 
 
 def request_drum_action_to_player(beat_filename, mode, plot_eval):
     """
-    Process of requesting a player to participate in a game-mode round
+    Process of requesting a player to participate in a game-mode round.
+    Deletes the auxiliar beat_file created during the process
     :param beat_filename:
     :param mode:
     :param plot_eval:
     :return:
     """
     play_and_request_beat(beat_filename)
-    timing_precision, color_precision = compare_results(beat_filename, plot_eval=plot_eval)
+    color_precision, timing_precision = compare_results(beat_filename, plot_eval=plot_eval)
+    os.remove(beat_path(beat_filename + "_user"))
+
     match mode:
         case "simon-says":
             return color_precision
@@ -157,4 +178,7 @@ def request_drum_action_to_player(beat_filename, mode, plot_eval):
 
 
 if __name__ == '__main__':
-    request_drum_action_to_player('ejemplo', "simon-says", True)
+    print("PLAYING A SIMON SAYS ROUND")
+    print(request_drum_action_to_player('ejemplo', "simon-says", True))
+    print("PLAYING A RYTHM GAME ROUND")
+    print(request_drum_action_to_player('ejemplo', "rythm-game", True))
