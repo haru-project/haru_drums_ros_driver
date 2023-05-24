@@ -56,7 +56,7 @@ class MidiDrum():
         thread.start()
 
     def handle(self, event, data):
-        if event[0][2] == 127 and (event[1] > 0.15 or event[1] == 0.0):
+        if event[0][2] == 127 and (event[1] > 0.1 or event[1] == 0.0):
             midi_signal = DrumMidiSignal()
             midi_signal.color = self.num_to_color_dict[event[0][1]]
             midi_signal.midi_key = event[0][1]

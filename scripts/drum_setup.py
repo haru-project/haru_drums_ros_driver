@@ -9,7 +9,7 @@ package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 config_path = os.path.join(package_path, "config")
 sounds_path = os.path.join(package_path, "src", "sounds")
 
-colors = ["red", "yellow", "blue", "green", "orange", "light-blue", "purple"]
+colors = ["red", "yellow", "blue", "green", "orange", "skyblue", "purple"]
 
 
 def read_drum_hit(port):
