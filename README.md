@@ -5,7 +5,7 @@ System (ROS) ecosystem. This package aims to bridge the gap between the musical 
 kit hardware and ROS-based applications.
 
 
-## Usage
+## Previous steps
 ### Step 1: Drum configuration
 
 Run this command the first time you use the drums. Follow the steps to set up your default midi port,
@@ -16,7 +16,7 @@ rosrun haru_drums_ros_driver run_drum_setup.sh
 ```
 
 ### Step 2: Init drum driver
-The drum driver node is responsible for capturing drum hits and publishing
+The drum driver node is responsible for capturing drum hits and publishing.
 DrumMidiSignal messages.
 ```shell
 roslaunch haru_drums_ros_driver midi_drum_driver.launch
@@ -30,6 +30,9 @@ Place your seven tracks inside a new folder in ``src/sounds`` and select them du
 sound tracks).
 
 ## Record and play beats
+`beat_creator.py` module takes charge of Creating and reproducing beat files, which are scripts that contain information about
+color hit, color id and the time between last hit.
+
 If you want to record and play your own beats you can do it via command line like so:
 
 ```shell
@@ -43,7 +46,7 @@ rosrun haru_drums_ros_driver play_beat.sh <name_of_your_beat>
 
 When recording with this method, the resulting beats will have a predefined length of 20 hits per beatfile.
 
-If you would like to have an specific number of drum hits, first source the virtual environment using the CLI of beat_creator.py script like so:
+If you would like to have an specific number of drum hits, first source the virtual environment, then use the CLI of `beat_creator.py` script like so:
 ```shell
 rosrun haru_drums_ros_driver beat_creator.py --help
 ```
@@ -61,3 +64,10 @@ optional arguments:
 Beat files are stored in ``src/beats`` folder.
 
 ## Request actions to the player
+The `beat_comparator.py` module is in charge of requesting the player to input a specific beat or hit sequence, it will
+generate a score of how accurate a player played the beat.
+
+The scoring system depends on the game-mode you are playing which can be:
+- Simon says (`simon-says`): The score is only based on color matching
+- Rythm game (`rythm-game`): The score is the mean score of color matching and timing accuracy
+
