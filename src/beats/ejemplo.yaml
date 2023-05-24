@@ -1,0 +1,22 @@
+hit_sequence:
+- color: green
+  delta_time: 0.11
+  midi_key: 46
+- color: red
+  delta_time: 0.7581498622894287
+  midi_key: 49
+- color: orange
+  delta_time: 0.7620567679405212
+  midi_key: 38
+- color: yellow
+  delta_time: 0.6501573324203491
+  midi_key: 48
+- color: skyblue
+  delta_time: 1.0951299667358398
+  midi_key: 45
+- color: blue
+  delta_time: 1.3523601293563843
+  midi_key: 51
+- color: purple
+  delta_time: 0.691888689994812
+  midi_key: 43
