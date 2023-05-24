@@ -1,16 +1,16 @@
 color_number:
   blue: 51
   green: 46
-  light-blue: 45
   orange: 38
   purple: 43
   red: 49
+  skyblue: 45
   yellow: 48
 default_port: 1
 number_color:
   38: orange
   43: purple
-  45: light-blue
+  45: skyblue
   46: green
   48: yellow
   49: red

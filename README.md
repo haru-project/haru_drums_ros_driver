@@ -41,5 +41,5 @@ To play an specific beat, use the next command:
 rosrun haru_drums_ros_driver play_beat.sh <name_of_your_beat>
 ```
 
-Sound sets and beats are stored in ``src/beats`` folder.
+Beat files are stored in ``src/beats`` folder.
 
