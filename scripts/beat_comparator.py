@@ -130,7 +130,7 @@ def color_score(color_diffs):
     :return:
     """
     num_hits = len(color_diffs)
-    return (np.sum(color_diffs) * 10) / num_hits
+    return round((np.sum(color_diffs) * 10) / num_hits, 2)
 
 
 def plot_results(colors, delta_times, score_color, score_time):
@@ -151,8 +151,8 @@ def plot_results(colors, delta_times, score_color, score_time):
     plt.legend()
     plt.ylabel("Time elapsed since last hit")
     plt.xlabel("Hit count")
-    plt.figtext(0.75, 0.95, f"Color score: {score_color} / 10\n"
-                            f" Time score: {score_time}  / 10",
+    plt.figtext(0.7, 0.95, f"Color score: {score_color} / 10\n"
+                            f" Time score: {score_time} / 10",
                 ha='left', va='center', bbox=dict(facecolor='white', edgecolor='black'))
     plt.show()
 

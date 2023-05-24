@@ -17,7 +17,7 @@ rosrun haru_drums_ros_driver run_drum_setup.sh
 
 ### Step 2: Init drum driver
 The drum driver node is responsible for capturing drum hits and publishing.
-DrumMidiSignal messages.
+DrumMidiSignal messages. This node must remain running to be able to execute the rest of the commands that are taught below.
 ```shell
 roslaunch haru_drums_ros_driver midi_drum_driver.launch
 ```
@@ -71,3 +71,8 @@ The scoring system depends on the game-mode you are playing which can be:
 - Simon says (`simon-says`): The score is only based on color matching
 - Rythm game (`rythm-game`): The score is the mean score of color matching and timing accuracy
 
+You can test and visualize the scoring system by calling the script directly:
+
+```shell
+rosrun haru_drums_ros_driver beat_comparator.py 
+```
