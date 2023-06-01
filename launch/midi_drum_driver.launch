@@ -1,4 +1,4 @@
 <launch>
-    <node name="drum_node" pkg="haru_drums_ros_driver" type="run_midi_drum_node.sh" output="screen" >
-    </node>
+    <node pkg="haru_drums_ros_driver" name="drum_node"          type="run_midi_drum_node.sh" output="screen"/>
+    <node pkg="haru_drums_ros_driver" name="simon_says_server"  type="simon_says_server.sh" output="screen"/>
 </launch>

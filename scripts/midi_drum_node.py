@@ -22,7 +22,6 @@ from pydub.playback import play
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 settings_path = os.path.join(package_path, "config", "drum_settings.yaml")
-sound_folder = os.path.join(package_path, "src", "sounds", "Mii_music_sounds")
 
 with open(settings_path, "r") as file:
     settings = yaml.safe_load(file)

@@ -7,6 +7,7 @@ import numpy as np
 import multiprocessing
 import matplotlib.pyplot as plt
 from beat_creator import BeatCreator
+import subprocess
 
 package_path = rospkg.RosPack().get_path("haru_drums_ros_driver")
 beats_path = os.path.join(package_path, "src", "beats")
@@ -31,10 +32,10 @@ def play_record_factory(beat_filename, play=False):
     """
     with open(beat_path(beat_filename), "r") as file:
         target = yaml.safe_load(file)
-
     num_hits = len(target["hit_sequence"])
-    rospy.init_node("beat_playing")
 
+
+    rospy.init_node("beat_playing")
     if play:
         BeatCreator(beat_filename, play)
     else:
@@ -43,7 +44,7 @@ def play_record_factory(beat_filename, play=False):
 
 
 def play_and_request_beat(beat_filename="ejemplo"):
-    """
+    """rosrun haru_drums_ros_driver record_beat.sh <name_of_your_beat>
     Plays a beat, then request the player the second beat
     :param beat_filename:
     :return:
@@ -58,20 +59,32 @@ def haru_turn(filename):
     Haru's turn will always play the beat
     :param filename:
     :return:
-    """
+
     record_process = multiprocessing.Process(target=play_record_factory, args=(filename, True))
     record_process.start()
     record_process.join()
+    """
+    command = f"rosrun haru_drums_ros_driver beat_creator.py --filename {filename} --play-beat"
+    proc = subprocess.Popen(command, shell=True)
+    proc.wait()
 
 def user_turn(filename):
     """
     User's turn will always request a beat
     :param filename:
     :return:
-    """
+
     record_process = multiprocessing.Process(target=play_record_factory, args=(filename, False))
     record_process.start()
     record_process.join()
+    """
+    with open(beat_path(filename), "r") as file:
+        target = yaml.safe_load(file)
+
+    num_hits = len(target["hit_sequence"])
+    command = f"rosrun haru_drums_ros_driver beat_creator.py --filename {filename}_user --num-hits {num_hits}"
+    proc = subprocess.Popen(command, shell=True)
+    proc.wait()
 
 def compare_results(beat_filename="ejemplo", plot_eval=False):
     """
