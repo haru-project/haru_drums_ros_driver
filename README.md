@@ -12,7 +12,7 @@ Run this command the first time you use the drums. Follow the steps to set up yo
 sounds and the colors of the drum pads
 
 ```shell
-rosrun haru_drums_ros_driver run_drum_setup.sh
+rosrun haru_drums_ros_driver drum_setup.sh
 ```
 
 ### Step 2: Init drum driver

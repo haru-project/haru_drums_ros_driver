@@ -1,7 +1,1 @@
-hit_sequence:
-- color: skyblue
-  delta_time: 0.75
-  midi_key: 45
-- color: orange
-  delta_time: 0.75
-  midi_key: 38
+hit_sequence: []

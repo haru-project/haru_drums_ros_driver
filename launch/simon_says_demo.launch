@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="haru_drums_ros_driver" name="drum_node"                type="midi_drum_node.sh"       output="screen"/>
+    <node pkg="haru_drums_ros_driver" name="simon_says_server"        type="simon_says_server.sh"        output="screen"/>
+    <node pkg="haru_drums_ros_driver" name="haru_comm_interface_node" type="haru_comm_interface.sh" output="screen"/>
+    <node pkg="haru_drums_ros_driver" name="simon_says_demo" type="simon_says_demo.sh" output="screen"/>
+</launch>

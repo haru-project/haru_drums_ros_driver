@@ -48,7 +48,8 @@ class MidiDrum():
         play(sound)
 
     def play_record(self, signal_msg: DrumMidiSignal):
-        self.play_sound_async(signal_msg.midi_key)
+        if self.custom_sounds:
+            self.play_sound_async(signal_msg.midi_key)
 
     def play_sound_async(self, midi_code):
         thread = threading.Thread(target=self.play_sound, args=(midi_code,), daemon=True)
@@ -69,7 +70,7 @@ class MidiDrum():
 
     def __str__(self):
         s: str = f"Midi Drum\n-------------------------------------\nListening through port: {self.port}\n-------------------------------------\n" \
-                 f"Color dictionary:"
+                 f"Color dictionary:\n"
         for key, value in self.num_to_color_dict.items():
             s += f"{key} <-----> {value}\n"
         return s

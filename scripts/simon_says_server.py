@@ -15,7 +15,7 @@ simon_says_beat = "simon_says"
 def get_random_hit():
     number = random.choice(list(settings["number_color"].keys()))
     color = settings["number_color"][number]
-    return {"color": color, "delta_time": 0.75, "midi_key": number}
+    return {"color": color, "delta_time": 1, "midi_key": number}
 
 def update_beat():
     with open(beat_path(simon_says_beat), "r") as file:
@@ -33,13 +33,16 @@ def reset_game():
 
 
 def gameplay_block(req):
-    update_beat()
     score = request_drum_action_to_player(beat_filename=simon_says_beat, mode="simon-says", plot_eval=False)
     if score == 10:
-        return SimonSaysResponse(True)
+        update_beat()
+        return SimonSaysResponse(True, score)
     else:
-        reset_game()
-        return SimonSaysResponse(False)
+        if score < 5:
+            reset_game()
+            return SimonSaysResponse(False, score)
+        else:
+            return SimonSaysResponse(True, score)
 
 def simon_says_server():
     rospy.init_node("simon_says_service")
@@ -47,4 +50,6 @@ def simon_says_server():
     rospy.spin()
 
 if __name__ == '__main__':
+    reset_game()
+    update_beat()
     simon_says_server()
