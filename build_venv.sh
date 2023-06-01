@@ -1,5 +1,5 @@
 #!/bin/bash
-python3 -m venv venv >/dev/null
+python3.10 -m venv venv >/dev/null
 source venv/bin/activate
 pip3 install --upgrade pip
 pip3 install wheel
