@@ -95,15 +95,30 @@ def setup_sound_set():
 
     return sound_tracks
 
+def real_robot_setup():
+    print('######################################################')
+    print('#               HARU ROBOT SELECTION                 #')
+    print('######################################################\n')
+    print("Tell if you are going to use the real robot or the avatar")
+    print('T - Real Robot')
+    print('F - Avatar')
+    selection = input("Selection:")
+    if selection == "t" or selection == "T":
+        return True
+    else:
+        return False
+
 
 def full_setup():
     port = setup_midi_port()
     number_color, color_number = setup_colors(port)
     sound_tracks = setup_sound_set()
     number_sound = dict(zip(number_color.keys(), sound_tracks))
+    real_robot = real_robot_setup()
 
     drum_data = {
         "default_port": port,
+        "real_robot": real_robot,
         "color_number": color_number,
         "number_color": number_color,
         "number_sound": number_sound

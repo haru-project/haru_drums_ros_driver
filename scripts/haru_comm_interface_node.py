@@ -5,18 +5,22 @@ import os
 from haru_drums_ros_driver.msg import DrumMidiSignal
 from idmind_tabletop_msgs.srv import TTSServiceRequest, TTSService
 from idmind_tabletop_msgs.msg import LCDCommand
-from midi_drum_node import package_path
+from midi_drum_node import package_path, settings
 
 class HaruCommInterface:
-    videos_path = os.path.join(package_path, "src", "eye_colors")
+    if settings["real_robot"]:
+        videos_path = os.path.join(package_path, "src", "eye_colors")
+    else:
+        videos_path = "/home/haru/drum_demo_videos"
+
     video_dict = {
-        "blue": os.path.join(videos_path, "blue.mp4"),
-        "green": os.path.join(videos_path, "green.mp4"),
-        "yellow": os.path.join(videos_path, "yellow.mp4"),
-        "orange": os.path.join(videos_path, "orange.mp4"),
-        "red": os.path.join(videos_path, "red.mp4"),
-        "purple": os.path.join(videos_path, "purple.mp4"),
-        "skyblue": os.path.join(videos_path, "skyblue.mp4")
+        "blue":     os.path.join(videos_path, "blue.mp4"),
+        "green":    os.path.join(videos_path, "green.mp4"),
+        "yellow":   os.path.join(videos_path, "yellow.mp4"),
+        "orange":   os.path.join(videos_path, "orange.mp4"),
+        "red":      os.path.join(videos_path, "red.mp4"),
+        "purple":   os.path.join(videos_path, "purple.mp4"),
+        "skyblue":  os.path.join(videos_path, "skyblue.mp4")
     }
 
     def __init__(self):
