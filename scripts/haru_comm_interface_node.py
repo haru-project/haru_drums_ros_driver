@@ -9,9 +9,9 @@ from midi_drum_node import package_path, settings
 
 class HaruCommInterface:
     if settings["real_robot"]:
-        videos_path = os.path.join(package_path, "src", "eye_colors")
-    else:
         videos_path = "/home/haru/drum_demo_videos"
+    else:
+        videos_path = os.path.join(package_path, "src", "eye_colors")
 
     video_dict = {
         "blue":     os.path.join(videos_path, "blue.mp4"),
