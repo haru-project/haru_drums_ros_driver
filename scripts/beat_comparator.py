@@ -183,11 +183,10 @@ def request_drum_action_to_player(beat_filename, mode, plot_eval):
     color_precision, timing_precision = compare_results(beat_filename, plot_eval=plot_eval)
     os.remove(beat_path(beat_filename + "_user"))
 
-    match mode:
-        case "simon-says":
-            return color_precision
-        case "rythm-game":
-            return np.mean([color_precision, timing_precision])
+    if mode == "simon-says":
+        return color_precision
+    if mode == "rythm-game":
+        return np.mean([color_precision, timing_precision])
 
 
 if __name__ == '__main__':

@@ -58,22 +58,27 @@ def speak(text):
 if __name__ == '__main__':
     speak("Hello there! I'm Haru ")
     # Some initial explanations
-    speak("I will be changing my eye's color to help you!")
+    speak("In this little demo you will get to play Simon Says with me!")
+    speak("To help you out, I will be changing my eyes color every time you hit the drums.")
+    speak("Or every time I say the color")
     speak("Try it by hitting the drums!")
     rospy.sleep(3)
     # Simon says gameplay block
     speak("Alright, let's start to play")
     success = True
-
+    sentence_counter = 0
     while success:
         success, score = simon_says_round()
         # if score is 10, then congratulate the player
         if score == 10:
-            speak(random.choice(positive_phrases))
+            sentence_counter += 1
+            if sentence_counter % 5 == 0:
+                speak(random.choice(positive_phrases))
         # if score is higher than five, then let him try again
         elif 5 < score < 10:
             speak(random.choice(encouraging_phrases))
         # If score is less than five, then that's a failure
 
-    speak("Well... that's a game over buddy")
+    speak(random.choice(encouraging_phrases))
+    speak("But I'm afraid that the game is over. Would you like to play again?")
 
